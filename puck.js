@@ -5,7 +5,7 @@ class Puck {
         this.xspeed = 0;
         this.yspeed = 0;
         this.r = 12;
-        
+        this.speed = fps.value();
         this.reset();
     }
     
@@ -18,8 +18,8 @@ class Puck {
                 let diff = this.y - (p.y - p.h/2);
                 let rad = radians(45);
                 let angle = map(diff, 0, p.h, -rad, rad);
-                this.xspeed = 5 * cos(angle);
-                this.yspeed = 5 * sin(angle);
+                this.xspeed = this.speed * cos(angle);
+                this.yspeed = this.speed * sin(angle);
                 this.x = p.x + p.w/2 + this.r;
             }
             
@@ -33,8 +33,8 @@ class Puck {
             if (this.x < p.x) {
                 let diff = this.y - (p.y - p.h/2);
                 let angle = map(diff, 0, p.h, radians(225), radians(135));
-                this.xspeed = 5 * cos(angle);
-                this.yspeed = 5 * sin(angle);
+                this.xspeed = this.speed * cos(angle);
+                this.yspeed = this.speed * sin(angle);
                 this.x = p.x - p.w/2 - this.r;
             }
         }
@@ -49,8 +49,8 @@ class Puck {
         this.x = width/2;
         this.y = height/2;
         let angle = random(-PI/4, PI/4);
-        this.xspeed = 5 * Math.cos(angle);
-        this.yspeed = 5 * Math.sin(angle);
+        this.xspeed = this.speed * Math.cos(angle);
+        this.yspeed = this.speed * Math.sin(angle);
         
         if (random(1) < 0.5) {
             this.xspeed *= -1;
@@ -74,6 +74,7 @@ class Puck {
     }
     
     show() {
+		this.speed = fps.value();
         fill(colorR.value(), colorG.value(), colorB.value());
         ellipse(this.x, this.y, this.r*2);
     }
