@@ -77,5 +77,7 @@ class Puck {
 		this.speed = fps.value();
         fill(colorR.value(), colorG.value(), colorB.value());
         ellipse(this.x, this.y, this.r*2);
+		fill(255, 255, 255, 100);
+		ellipse(this.x, this.y, (this.r*2)/2);
     }
 }
