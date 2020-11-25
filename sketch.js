@@ -4,12 +4,12 @@
 let leftscore = 0;
 let rightscore = 0;
 let menu = 1;
+let timer = 60;
 
 function setup() {
     createCanvas(800, 600);
-	gameDiff = 1;
-	fps = createSlider(3, 8, 5, 1);
-	fps.position(width/2-75, 160);
+	gameDiff = createSlider(1, 3, 2, 1);
+	gameDiff.position(width/2-75, 320);
     ball = new Ball();
 	ball2 = new Ball();
     left = new Paddle(true);
@@ -27,13 +27,16 @@ function setup() {
 		colorR.style('visibility', 'hidden');
 		colorG.style('visibility', 'hidden');
 		colorB.style('visibility', 'hidden');
-		fps.style('visibility', 'hidden');
+		gameDiff.style('visibility', 'hidden');
 	
 	beginGame = new Clickable();
 	beginGame.locate(width/2-50, 120);
 	beginGame.text = 'START GAME';
 	beginGame.onPress = function(){
+		ball.reset();
+		ball2.reset();
 		menu = 0;
+		timer = 60;
 	}
 	endGame = new Clickable();
 	endGame.text = 'MAIN MENU';
@@ -59,7 +62,7 @@ function setup() {
 		colorR.style('visibility', 'visible');
 		colorG.style('visibility', 'visible');
 		colorB.style('visibility', 'visible');
-		fps.style('visibility', 'visible');
+		gameDiff.style('visibility', 'visible');
 	}
 	backToMenu = new Clickable();
 	backToMenu.text = 'MAIN MENU';
@@ -72,7 +75,7 @@ function setup() {
 		colorR.style('visibility', 'hidden');
 		colorG.style('visibility', 'hidden');
 		colorB.style('visibility', 'hidden');
-		fps.style('visibility', 'hidden');
+		gameDiff.style('visibility', 'hidden');
 	}
 }
 
@@ -100,7 +103,7 @@ function menuUpdate() {
 		text('GREEN', colorG.x - 10, colorG.y+5);
 		text('BLUE', colorB.x - 10, colorB.y+5);
 		text('BALL SIZE', sizeSlider.x - 10, sizeSlider.y+5);
-		text('GAME SPEED', fps.x - 10, fps.y+5);
+		text('GAME DIFFICULTY', gameDiff.x - 10, gameDiff.y+5);
 	}
 }
 
@@ -109,7 +112,7 @@ function gameUpdate() {
 	background(0);
 	rectMode(CORNER);	
 	endGame.draw();
-	if (gameDiff == 3) {
+	if (gameDiff.value() == 3) {
 		ball.checkPaddleRight(right);
 		ball.checkPaddleLeft(left);
 		ball.r = sizeSlider.value();
@@ -139,7 +142,20 @@ function gameUpdate() {
 	text(leftscore, 32, 40);
 	text(rightscore, width-64, 40);
 	fill(0, 255, 0);
-	text(fps.value(), width/2, 40);
+	text(timer, width/2, height/2);
+	if (frameCount % 60 == 0 && timer > 0) {
+		timer --;
+	}
+    if (timer == 0) {
+		text("GAME OVER", width/2, height*0.7);
+	if (leftscore > rightscore) {
+		text("PLAYER 1 WON!", width/2, height*0.8);
+	} else if (leftscore < rightscore) {
+		text("PLAYER 2 WON!", width/2, height*0.8);
+	} else {
+		text("IT'S A TIE!", width/2, height*0.8);
+	}
+  }
 }
 
 function keyReleased() {

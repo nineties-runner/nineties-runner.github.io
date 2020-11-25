@@ -5,7 +5,13 @@ class Ball {
         this.xspeed = 0;
         this.yspeed = 0;
         this.r = 12;
-        this.speed = fps.value();
+        if (gameDiff.value() == 1){
+			this.speed = 4;
+		} else if (gameDiff.value() == 2){
+			this.speed = 6;
+		} else if (gameDiff.value() == 3){
+			this.speed = 7;
+		}
         this.reset();
     }
     
@@ -40,22 +46,31 @@ class Ball {
             }
         }
     }
-    
+	
     update() {
         this.x += this.xspeed;
         this.y += this.yspeed;
     }
-    
+	
     reset() {
         this.x = width/2;
         this.y = height/2;
         let angle = random(-PI/4, PI/4);
+		if (gameDiff.value() == 1){
+			this.speed = 4;
+		} else if (gameDiff.value() == 2){
+			this.speed = 6;
+		} else if (gameDiff.value() == 3){
+			this.speed = 7;
+		}
         this.xspeed = this.speed * Math.cos(angle);
         this.yspeed = this.speed * Math.sin(angle);
         
         if (random(1) < 0.5) {
             this.xspeed *= -1;
         }
+		
+		
     }
     
     edges() {
@@ -64,21 +79,32 @@ class Ball {
         }
         
         if (this.x - this.r > width) {
+			if (timer !== 0) {
             leftscore++;
+			}
             this.reset();
         }
         
         if (this.x + this.r < 0) {
-            rightscore++;
+            if (timer !== 0) {
+			rightscore++;
+			}
             this.reset();
         }
     }
     
     show() {
-		this.speed = fps.value();
+		if (gameDiff.value() == 1){
+			this.speed = 4;
+		} else if (gameDiff.value() == 2){
+			this.speed = 6;
+		} else if (gameDiff.value() == 3){
+			this.speed = 7;
+		}
         fill(colorR.value(), colorG.value(), colorB.value());
         ellipse(this.x, this.y, this.r*2);
 		fill(255, 255, 255, 100);
 		ellipse(this.x, this.y, (this.r*2)/2);
     }
+	
 }
