@@ -7,9 +7,11 @@ let menu = 1;
 
 function setup() {
     createCanvas(800, 600);
+	gameDiff = 1;
 	fps = createSlider(3, 8, 5, 1);
 	fps.position(width/2-75, 160);
     ball = new Ball();
+	ball2 = new Ball();
     left = new Paddle(true);
     right = new Paddle(false);
 	sizeSlider = createSlider(1, 32, 12, 0.1);
@@ -107,16 +109,31 @@ function gameUpdate() {
 	background(0);
 	rectMode(CORNER);	
 	endGame.draw();
-	ball.checkPaddleRight(right);
-	ball.checkPaddleLeft(left);
-	ball.r = sizeSlider.value();
+	if (gameDiff == 3) {
+		ball.checkPaddleRight(right);
+		ball.checkPaddleLeft(left);
+		ball.r = sizeSlider.value();
+		ball.update();
+		ball.edges();
+		ball.show();
+		ball2.checkPaddleRight(right);
+		ball2.checkPaddleLeft(left);
+		ball2.r = sizeSlider.value();
+		ball2.update();
+		ball2.edges();
+		ball2.show();
+	} else {
+		ball.checkPaddleRight(right);
+		ball.checkPaddleLeft(left);
+		ball.r = sizeSlider.value();
+		ball.update();
+		ball.edges();
+		ball.show();
+	}
 	left.show();
 	right.show();
 	left.update();
 	right.update();
-	ball.update();
-	ball.edges();
-	ball.show();
 	fill(255);
 	textSize(32);
 	text(leftscore, 32, 40);
