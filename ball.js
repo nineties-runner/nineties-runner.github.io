@@ -1,4 +1,4 @@
-class Puck {
+class Ball {
     constructor() {
         this.x = width/2;
         this.y = height/2;
@@ -25,6 +25,7 @@ class Puck {
             
         }
     }
+	
     checkPaddleRight(p) {
         if (this.y - this.r < p.y + p.h/2 &&
             this.y + this.r > p.y - p.h/2 &&
