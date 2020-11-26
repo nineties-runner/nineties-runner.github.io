@@ -11,6 +11,7 @@ function preload() {
 
 function setup() {
   bg = loadImage('bg.png');
+  menuimg = loadImage('menu.png');
   createCanvas(800, 600);
   gameDiff = createSlider(1, 3, 2, 1);
   gameDiff.position(width / 2 - 75, 180);
@@ -96,7 +97,7 @@ function draw() {
 
 function menuUpdate() {
   if (menu == 1) {
-    background(bg);
+    background(menuimg);
 	tint(cos(colorshift)*255, sin(colorshift)*255, cos(colorshift)*255);
 	colorshift = colorshift + 0.01;
     rectMode(CORNER);
@@ -121,7 +122,7 @@ function menuUpdate() {
 function gameUpdate() {
   frameRate = 1;
   background(bg);
-	tint(cos(colorshift)*255, sin(colorshift)*255, 255);
+	tint(sin(colorshift)*255, 255, sin(colorshift)*255);
 	colorshift = colorshift + 0.01;
   rectMode(CORNER);
   endGame.draw();
