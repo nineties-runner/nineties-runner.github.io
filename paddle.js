@@ -24,6 +24,7 @@ class Paddle {
 		let off = 10;
         fill(143, 235, 52);
         rectMode(CENTER);
+		stroke(8);
         rect(this.x, this.y, this.w, this.h);
 		fill(255, 255, 255, 150);
 		rect(this.x, this.y, this.w-off, this.h-off);

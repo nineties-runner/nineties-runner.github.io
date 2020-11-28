@@ -122,8 +122,8 @@ function menuUpdate() {
 function gameUpdate() {
   frameRate = 1;
   background(bg);
-	tint(sin(colorshift)*255, 255, sin(colorshift)*255);
-	colorshift = colorshift + 0.01;
+	tint(sin(colorshift)*255, cos(colorshift)*255, 255);
+	colorshift = colorshift + 0.02;
   rectMode(CORNER);
   endGame.draw();
   if (gameDiff.value() == 3) {
@@ -172,6 +172,14 @@ function gameUpdate() {
   }
 }
 
+function sleep(milliseconds) {
+  const date = Date.now();
+  let currentDate = null;
+  do {
+    currentDate = Date.now();
+  } while (currentDate - date < milliseconds);
+}
+
 function keyReleased() {
   //console.log(key);
   if (key == 'A' ||
@@ -207,5 +215,13 @@ function keyPressed() {
   } else if (key == 'M' ||
     key == 'm') {
     right.move(10);
+  }
+  
+  if (timer == 0) {
+	sleep(1000);
+	ball.reset();
+    ball2.reset();
+    menu = 0;
+    timer = 60;
   }
 }

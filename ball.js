@@ -101,8 +101,10 @@ class Ball {
 		} else if (gameDiff.value() == 3){
 			this.speed = 7;
 		}
+		stroke(8);
         fill(colorR.value(), colorG.value(), colorB.value());
         ellipse(this.x, this.y, this.r*2);
+		noStroke();
 		fill(255, 255, 255, 100);
 		ellipse(this.x, this.y, (this.r*2)/2);
     }
