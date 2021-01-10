@@ -1,0 +1,15 @@
+"Updater"
+{
+	"Information"
+	{
+		"Version"
+		{
+			"Latest"	".001"
+		}
+	}
+	
+	"Files"
+	{
+		"Plugin"	"Path_SM/plugins/myplugin.smx"
+	}
+}
