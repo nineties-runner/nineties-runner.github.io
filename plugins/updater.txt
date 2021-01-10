@@ -10,6 +10,6 @@
 	
 	"Files"
 	{
-		"Plugin"	"Path_SM/plugins/myplugin.smx"
+		"Plugin"	"https://nineties-runner.github.io/plugins/thirdperson.smx"
 	}
 }
